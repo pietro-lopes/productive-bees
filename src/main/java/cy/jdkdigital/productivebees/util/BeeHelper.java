@@ -319,7 +319,7 @@ public class BeeHelper
             }
         }
 
-        int rolls = Math.max(1, (int) modifier);
+        int rolls = (int) Math.floor(modifier) + (level.random.nextDouble() < modifier % 1 ? 1 : 0);
 
         if (matchedRecipe != null) {
             matchedRecipe.value().getRecipeOutputs().forEach((itemStack, chancedOutput) -> {

@@ -270,7 +270,7 @@ public class AdvancedBeehiveBlockEntity extends AdvancedBeehiveBlockEntityAbstra
             // Generate bee produce (No produce after converting a block)
             if (!(beeEntity instanceof ProductiveBee productiveBee) || !productiveBee.hasConverted()) {
                 // Count productivity modifier
-                double upgradeMod = ProductiveBeesConfig.UPGRADES.productivityMultiplier.get() * (getUpgradeCount(ModItems.UPGRADE_PRODUCTIVITY.get()) + getUpgradeCount(LibItems.UPGRADE_PRODUCTIVITY.get()))
+                double upgradeMod = 1 + ProductiveBeesConfig.UPGRADES.productivityMultiplier.get() * (getUpgradeCount(ModItems.UPGRADE_PRODUCTIVITY.get()) + getUpgradeCount(LibItems.UPGRADE_PRODUCTIVITY.get()))
                                     + ProductiveBeesConfig.UPGRADES.productivityMultiplier2.get() * (getUpgradeCount(ModItems.UPGRADE_PRODUCTIVITY_2.get()) + getUpgradeCount(LibItems.UPGRADE_PRODUCTIVITY_2.get()))
                                     + ProductiveBeesConfig.UPGRADES.productivityMultiplier3.get() * (getUpgradeCount(ModItems.UPGRADE_PRODUCTIVITY_3.get()) + getUpgradeCount(LibItems.UPGRADE_PRODUCTIVITY_3.get()))
                                     + ProductiveBeesConfig.UPGRADES.productivityMultiplier4.get() * (getUpgradeCount(ModItems.UPGRADE_PRODUCTIVITY_4.get()) + getUpgradeCount(LibItems.UPGRADE_PRODUCTIVITY_4.get()));
