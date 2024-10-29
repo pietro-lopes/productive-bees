@@ -2,15 +2,15 @@
   "type": "immersiveengineering:squeezer",
   "energy": 19200,
   "input": {
-    "base_ingredient": {
+    "basePredicate": {
+      "type": "productivebees:component",
       "components": {
         "minecraft:entity_data": {
           "type": "productivebees:coal",
           "id": "productivebees:configurable_bee"
         }
       },
-      "count": 1,
-      "id": "productivebees:spawn_egg_configurable_bee"
+      "items": "productivebees:spawn_egg_configurable_bee"
     },
     "count": 8
   },

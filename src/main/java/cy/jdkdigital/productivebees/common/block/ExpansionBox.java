@@ -131,10 +131,10 @@ public class ExpansionBox extends Block implements EntityBlock
     }
 
     @Override
-    public void setPlacedBy(Level world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        super.setPlacedBy(world, pos, state, placer, stack);
-        if (!world.isClientSide()) {
-            this.updateState(world, pos, state, false);
+    public void setPlacedBy(Level level, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+        if (!level.isClientSide()) {
+            this.updateState(level, pos, state, false);
         }
     }
 

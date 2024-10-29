@@ -116,10 +116,10 @@ public class AdvancedBeehive extends AdvancedBeehiveAbstract
         }
     }
 
-    public static Pair<Pair<BlockPos, Direction>, BlockState> getAdjacentBox(Level world, BlockPos pos, boolean onlyFreeBoxes) {
+    public static Pair<Pair<BlockPos, Direction>, BlockState> getAdjacentBox(Level level, BlockPos pos, boolean onlyFreeBoxes) {
         for (Direction direction : BlockStateProperties.FACING.getPossibleValues()) {
             BlockPos newPos = pos.relative(direction);
-            BlockState blockStateAtPos = world.getBlockState(newPos);
+            BlockState blockStateAtPos = level.getBlockState(newPos);
 
             if (blockStateAtPos.getBlock() instanceof ExpansionBox) {
                 return Pair.of(Pair.of(newPos, direction), blockStateAtPos);
@@ -128,11 +128,11 @@ public class AdvancedBeehive extends AdvancedBeehiveAbstract
         return null;
     }
 
-    public static VerticalHive calculateExpandedDirection(Level world, BlockPos hivePos, boolean isRemoved) {
-        Pair<Pair<BlockPos, Direction>, BlockState> pair = getAdjacentBox(world, hivePos, true);
+    public static VerticalHive calculateExpandedDirection(Level level, BlockPos hivePos, boolean isRemoved) {
+        Pair<Pair<BlockPos, Direction>, BlockState> pair = getAdjacentBox(level, hivePos, true);
         VerticalHive directionProperty = VerticalHive.NONE;
         if (!isRemoved && pair != null) {
-            BlockState hiveBlockState = world.getBlockState(hivePos);
+            BlockState hiveBlockState = level.getBlockState(hivePos);
             Direction hiveDirection = hiveBlockState.getValue(BeehiveBlock.FACING);
             Direction boxDirection = pair.getLeft().getRight();
 

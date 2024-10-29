@@ -1,14 +1,19 @@
 package cy.jdkdigital.productivebees.datagen.recipe.provider;
 
+import com.mojang.datafixers.util.Either;
 import cy.jdkdigital.productivebees.ProductiveBees;
 import cy.jdkdigital.productivebees.common.crafting.conditions.BeeExistsCondition;
+import cy.jdkdigital.productivebees.common.crafting.ingredient.ComponentIngredient;
 import cy.jdkdigital.productivebees.datagen.recipe.builder.CentrifugeRecipeBuilder;
 import cy.jdkdigital.productivebees.init.ModBlocks;
 import cy.jdkdigital.productivebees.init.ModFluids;
 import cy.jdkdigital.productivebees.init.ModTags;
 import cy.jdkdigital.productivebees.setup.HiveType;
+import cy.jdkdigital.productivebees.util.BeeCreator;
+import cy.jdkdigital.productivebees.util.BeeHelper;
 import cy.jdkdigital.productivelib.common.recipe.TagOutputRecipe;
 import net.minecraft.advancements.critereon.InventoryChangeTrigger;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
@@ -17,6 +22,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.Tags;
@@ -27,11 +33,15 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider implements IConditionBuilder
 {
+    private final CompletableFuture<HolderLookup.Provider> pRegistries;
+
     public RecipeProvider(PackOutput gen, CompletableFuture<HolderLookup.Provider> pRegistries) {
         super(gen, pRegistries);
+        this.pRegistries = pRegistries;
     }
 
     @Override
@@ -41,8 +51,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider im
 
     @Override
     protected void buildRecipes(RecipeOutput consumer) {
-//        var mixingRecipeBuilder = new MixingRecipeGenerator();
-
         ModBlocks.HIVELIST.forEach((modid, strings) -> {
             strings.forEach((name, type) -> {
                 if (ProductiveBees.includeMod(modid)) {
@@ -78,7 +86,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider im
 //                .addOutput(new TagOutputRecipe.ChancedOutput(Ingredient.of(Items.VERDANT_FROGLIGHT), 1, 1, 0.05f))
 ////                .setFluidOutput(new FluidStack(ModFluids.HONEY, 0))
 //                .save(consumer.withConditions(new BeeExistsCondition(ResourceLocation.fromNamespaceAndPath(ProductiveBees.MODID, "ribbeet"))), ResourceLocation.fromNamespaceAndPath(ProductiveBees.MODID, "centrifuge/honeycomb_ribbeet"));
-
 
 //        var egg = new ItemStack(ModItems.CONFIGURABLE_SPAWN_EGG.get());
 //        var tag = new CompoundTag();

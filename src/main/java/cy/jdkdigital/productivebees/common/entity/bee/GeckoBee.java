@@ -43,7 +43,7 @@ public class GeckoBee extends ConfigurableBee implements GeoEntity
     public ResourceLocation getModelLocation() {
         var data  = getNBTData();
         return data.contains("model") ? ResourceLocation.parse(data.getString("model")) :
-                ResourceLocation.fromNamespaceAndPath(ProductiveBees.MODID, "geo/entity/" + getRenderer() + ".geo.json");
+                ResourceLocation.fromNamespaceAndPath(ProductiveBees.MODID, "geo/entity/" + (getRenderer().isEmpty() ? "default" : getRenderer()) + ".geo.json");
     }
 
     public ResourceLocation getTextureLocation() {

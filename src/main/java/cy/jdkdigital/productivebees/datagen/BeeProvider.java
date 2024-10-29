@@ -22,6 +22,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.GsonHelper;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.conditions.*;
 import org.jetbrains.annotations.NotNull;
@@ -421,7 +422,7 @@ public class BeeProvider implements DataProvider
             add(new BeeConfig("iceandfire/ice_dragonsteel").primaryColor("#c0e3f6").secondaryColor("#323234").particleColor("#fcfcfc").onlySpawnegg().renderer("thicc").size(1.2).attributes(new HashMap<>(){{ put("endurance", GeneValue.ENDURANCE_STRONG.getSerializedName()); put("productivity", GeneValue.PRODUCTIVITY_MEDIUM.getSerializedName()); }}).flowerBlock("iceandfire:dragonsteel_ice_block").requireMod("iceandfire"));
             add(new BeeConfig("iceandfire/lightning_dragonsteel").primaryColor("#4d3e7c").secondaryColor("#9177ae").particleColor("#8471a0").onlySpawnegg().renderer("thicc").size(1.2).attributes(new HashMap<>(){{ put("endurance", GeneValue.ENDURANCE_STRONG.getSerializedName()); put("productivity", GeneValue.PRODUCTIVITY_MEDIUM.getSerializedName()); }}).flowerBlock("iceandfire:dragonsteel_lightning_block").requireMod("iceandfire"));
 
-            add(new BeeConfig("immersiveengineering/hop_graphite").primaryColor("#242424").secondaryColor("#202020").tertiaryColor("#0a0a0a").particleColor("#191919").size(0.9).flowerItem("immersiveengineering:graphite_electrode").noSelfBreed().requireMod("immersiveengineering"));
+            add(new BeeConfig("immersiveengineering/hop_graphite").primaryColor("#242424").secondaryColor("#202020").tertiaryColor("#0a0a0a").particleColor("#191919").size(0.9).flowerItem("immersiveengineering:graphite_electrode").noSelfBreed().onlySpawnegg().requireMod("immersiveengineering"));
 
             add(new BeeConfig("industrialforegoing/ether_gas").primaryColor("#9ad7e3").secondaryColor("#70b4c2").particleColor("#b5f3ff").beeTexture("ether_gas").renderer("translucent_with_center").size(0.5).flowerTag("c:withers").flowerType("entity_types").noSelfBreed().requireMod("industrialforegoing"));
             add(new BeeConfig("industrialforegoing/pink_slimy").primaryColor("#b969ba").secondaryColor("#623875").particleColor("#c98bca").beeTexture("pink_slimy").renderer("translucent_with_center").attributes(new HashMap<>(){{ put("productivity", GeneValue.PRODUCTIVITY_NORMAL.getSerializedName()); }}).slimy().flowerTag("productivebees:flowers/swamp").nestingPreference("productivebees:nests/slimy_nests").requireFluidTag("c", "pink_slime"));
@@ -517,6 +518,9 @@ public class BeeProvider implements DataProvider
             add(new BeeConfig("shroom/crimson").primaryColor("#6e1917").secondaryColor("#2f0d06").tertiaryColor("#913000").particleColor("#913000").flowerBlock("minecraft:crimson_fungus").renderer("default_foliage").size(0.5).breedingItem("minecraft:crimson_fungus").attributes(new HashMap<>(){{ put("behavior", GeneValue.BEHAVIOR_NOCTURNAL.getSerializedName()); }}).nestingPreference("productivebees:nests/nether_nests"));
             add(new BeeConfig("shroom/red_shroom").primaryColor("#8e1410").secondaryColor("#566551").particleColor("#8e1410").flowerBlock("minecraft:red_mushroom").renderer("default_foliage").size(0.5).breedingItem("minecraft:red_mushroom"));
             add(new BeeConfig("shroom/warped").primaryColor("#0c6138").secondaryColor("#0c3326").tertiaryColor("#9a562c").particleColor("#9a3600").flowerBlock("minecraft:warped_fungus").renderer("default_foliage").size(0.5).breedingItem("minecraft:warped_fungus").attributes(new HashMap<>(){{ put("behavior", GeneValue.BEHAVIOR_NOCTURNAL.getSerializedName()); }}).nestingPreference("productivebees:nests/nether_nests"));
+
+            add(new BeeConfig("silentgear/azure_silver").primaryColor("#702ccc").secondaryColor("#b678ff").particleColor("#fdc0ff").beeTexture("azure_silver").size(0.6f).flowerBlock("silentgear:azure_silver_block").requireMod("silentgear"));
+            add(new BeeConfig("silentgear/crimson_iron").primaryColor("#7b144c").secondaryColor("#de4476").particleColor("#f3476f").beeTexture("crimson_iron").size(0.8f).flowerBlock("silentgear:crimson_iron_block").requireMod("silentgear"));
 
             add(new BeeConfig("spirit/spirit").primaryColor("#839cb8").secondaryColor("#0d1119").particleColor("#5c687d").flowerBlock("spirit:soul_steel_block").requireMod("spirit"));
 

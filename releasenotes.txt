@@ -1,8 +1,16 @@
-1.21.1-13.6.1-pre
+1.21.1-13.6.2-pre
+
+- Added Azure Silver and Crimson Iron bees from Silent Gear (Lego)
+- Fixed crash from spawning invalid bees
+
+
+1.21.1-13.6.1
 
 - Other centrifuge performance improvements (UltraMega)
 - Changed Regalium bee recipe to use Gloomper Anthem disc
 - Added new tags for default flowering, tempt and breeding items making it easier to change those for all bees as once
+- Changed Deorum bee egg recipe
+- Removed some debug output
 
 
 1.21.1-13.6.0
