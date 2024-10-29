@@ -84,24 +84,27 @@ public class HeatedCentrifugeBlockEntity extends PoweredCentrifugeBlockEntity
         String cacheKey = BuiltInRegistries.ITEM.getKey(input.getItem()).toString() + (!input.getComponents().isEmpty() ? input.getComponents().stream().map(TypedDataComponent::toString).reduce((s, s2) -> s + s2) : "");
 
         if (!input.is(ModTags.Common.STORAGE_BLOCK_HONEYCOMBS)) {
-            return super.getRecipe(inputHandler);
-        } else {
-            if (!blockRecipeMap.containsKey(cacheKey)) {
-                ItemStack singleComb;
-                // config honeycomb
-                if (input.getItem() instanceof CombBlockItem) {
-                    singleComb = new ItemStack(ModItems.CONFIGURABLE_HONEYCOMB.get());
-                    singleComb.set(ModDataComponents.BEE_TYPE, input.get(ModDataComponents.BEE_TYPE));
-                } else {
-                    singleComb = BeeHelper.getRecipeOutputFromInput(level, input.getItem());
-                }
-                var inv = new InventoryHandlerHelper.BlockEntityItemStackHandler(2);
-                // Look up recipe for the single comb that makes up the input comb block
-                inv.setStackInSlot(InventoryHandlerHelper.INPUT_SLOT, singleComb);
-                blockRecipeMap.put(cacheKey, super.getRecipe(inv));
+            var directRecipe = super.getRecipe(inputHandler);
+            if (directRecipe != null) {
+                return directRecipe;
             }
-            return blockRecipeMap.get(cacheKey);
         }
+
+        if (!blockRecipeMap.containsKey(cacheKey)) {
+            ItemStack singleComb;
+            // config honeycomb
+            if (input.getItem() instanceof CombBlockItem) {
+                singleComb = new ItemStack(ModItems.CONFIGURABLE_HONEYCOMB.get());
+                singleComb.set(ModDataComponents.BEE_TYPE, input.get(ModDataComponents.BEE_TYPE));
+            } else {
+                singleComb = BeeHelper.getRecipeOutputFromInput(level, input.getItem());
+            }
+            var inv = new InventoryHandlerHelper.BlockEntityItemStackHandler(2);
+            // Look up recipe for the single comb that makes up the input comb block
+            inv.setStackInSlot(InventoryHandlerHelper.INPUT_SLOT, singleComb);
+            blockRecipeMap.put(cacheKey, super.getRecipe(inv));
+        }
+        return blockRecipeMap.get(cacheKey);
     }
 
     @Override

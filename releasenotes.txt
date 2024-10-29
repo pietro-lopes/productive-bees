@@ -1,7 +1,11 @@
-1.21.1-13.6.2-pre
+1.21.1-13.6.2
 
 - Added Azure Silver and Crimson Iron bees from Silent Gear (Lego)
+- Added Turkish translation (RuyaSavascisi)
 - Fixed crash from spawning invalid bees
+- Fixed production upgrade modifier (stellanera98)
+- Fixed GT Bees (Satherov)
+- Fixed comb blocks not using custom recipes in heated centrifuges
 
 
 1.21.1-13.6.1
