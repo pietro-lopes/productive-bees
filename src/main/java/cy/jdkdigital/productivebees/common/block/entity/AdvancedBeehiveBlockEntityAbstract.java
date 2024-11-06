@@ -132,15 +132,17 @@ public abstract class AdvancedBeehiveBlockEntityAbstract extends BeehiveBlockEnt
                     // for simulated hives, count all the way up to timeInHive + pollinationTime
                     if (ticksInHive > (minOccupationTicks + 450)) {
                         Entity simulatedBee = simulateBee(pLevel, pPos, pState, blockEntity, inhabitant);
-                        hasReleased = true;
-                        ticksInHive = 0;
+                        if (simulatedBee != null) { // someone managed to make this happen, wtf so here's a null check
+                            hasReleased = true;
+                            ticksInHive = 0;
 
-                        minOccupationTicks = blockEntity.getTimeInHive(beeReleaseStatus.equals(BeehiveBlockEntity.BeeReleaseStatus.HONEY_DELIVERED), inhabitant);
+                            minOccupationTicks = blockEntity.getTimeInHive(beeReleaseStatus.equals(BeehiveBlockEntity.BeeReleaseStatus.HONEY_DELIVERED), inhabitant);
 
-                        // update bee data
-                        CompoundTag compoundNBT = new CompoundTag();
-                        simulatedBee.save(compoundNBT);
-                        entityData = CustomData.of(compoundNBT);
+                            // update bee data
+                            CompoundTag compoundNBT = new CompoundTag();
+                            simulatedBee.save(compoundNBT);
+                            entityData = CustomData.of(compoundNBT);
+                        }
                     } else if (willLeaveHive(pLevel, inhabitant, beeReleaseStatus)){
                         // only add count if outside is favourable
                         ticksInHive += blockEntity.tickCounter;
@@ -235,14 +237,14 @@ public abstract class AdvancedBeehiveBlockEntityAbstract extends BeehiveBlockEnt
             beeEntity.setHivePos(pPos);
             BeehiveBlockEntity.BeeReleaseStatus beeState = BeehiveBlockEntity.BeeReleaseStatus.BEE_RELEASED;
             if (data.getString("id").equals("productivebees:farmer_bee")) {
-                List<BlockPos> harvestablesNearby = FarmerBee.findHarvestablesNearby(pLevel, pPos, 5 + advancedBeehiveBlockEntity.getUpgradeCount(ModItems.UPGRADE_RANGE.get()) + advancedBeehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_RANGE.get()));
+                List<BlockPos> harvestablesNearby = FarmerBee.findHarvestablesNearby(pLevel, pPos, 5 + advancedBeehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_RANGE.get()));
                 harvestablesNearby.forEach(pos -> {
                     if (pos != null && pLevel.isLoaded(pos) && HarvestCompatHandler.isCropValid(pLevel, pos)) {
                         HarvestCompatHandler.harvestBlock(pLevel, pos);
                     }
                 });
             } else if (data.getString("id").equals("productivebees:hoarder_bee") || data.getString("id").equals("productivebees:collector_bee")) {
-                int distance = 5 + advancedBeehiveBlockEntity.getUpgradeCount(ModItems.UPGRADE_RANGE.get()) + advancedBeehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_RANGE.get());
+                int distance = 5 + advancedBeehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_RANGE.get());
                 List<ItemEntity> items = pLevel.getEntitiesOfClass(ItemEntity.class, (new AABB(pPos).inflate(distance, distance, distance)));
                 for (ItemEntity item: items) {
                     if (advancedBeehiveBlockEntity.inventoryHandler instanceof InventoryHandlerHelper.BlockEntityItemStackHandler inv) {

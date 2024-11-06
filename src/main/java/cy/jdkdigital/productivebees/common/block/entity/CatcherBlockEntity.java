@@ -65,9 +65,8 @@ public class CatcherBlockEntity extends CapabilityBlockEntity implements MenuPro
                 if (invItem.getItem() instanceof BeeCage && !BeeCage.isFilled(invItem)) {
                     // We have a valid inventory for catching, look for entities above
                     List<Bee> bees = level.getEntitiesOfClass(Bee.class, blockEntity.getBoundingBox());
-                    int babeeUpgrades = blockEntity.getUpgradeCount(ModItems.UPGRADE_BREEDING.get()) + blockEntity.getUpgradeCount(LibItems.UPGRADE_CHILD.get());
-                    int notBabeeUpgrades = blockEntity.getUpgradeCount(ModItems.UPGRADE_NOT_BABEE.get()) + blockEntity.getUpgradeCount(LibItems.UPGRADE_ADULT.get());
-                    List<ItemStack> oldFilterUpgrades = blockEntity.getInstalledUpgrades(ModItems.UPGRADE_FILTER.get());
+                    int babeeUpgrades = blockEntity.getUpgradeCount(LibItems.UPGRADE_CHILD.get());
+                    int notBabeeUpgrades = blockEntity.getUpgradeCount(LibItems.UPGRADE_ADULT.get());
                     List<ItemStack> filterUpgrades = blockEntity.getInstalledUpgrades(LibItems.UPGRADE_ENTITY_FILTER.get());
                     for (Bee bee : bees) {
                         if (babeeUpgrades > 0 && !bee.isBaby()) {
@@ -77,18 +76,7 @@ public class CatcherBlockEntity extends CapabilityBlockEntity implements MenuPro
                             continue;
                         }
 
-                        boolean isAllowed = oldFilterUpgrades.isEmpty() && filterUpgrades.isEmpty();
-                        if (!oldFilterUpgrades.isEmpty()) {
-                            for (ItemStack filter: oldFilterUpgrades) {
-                                List<Supplier<BeeIngredient>> allowedBees = FilterUpgradeItem.getAllowedBees(filter);
-                                for (Supplier<BeeIngredient> allowedBee: allowedBees) {
-                                    String type = BeeIngredientFactory.getIngredientKey(bee);
-                                    if (allowedBee.get().getBeeType().toString().equals(type)) {
-                                        isAllowed = true;
-                                    }
-                                }
-                            }
-                        }
+                        boolean isAllowed = filterUpgrades.isEmpty();
 
                         if (!filterUpgrades.isEmpty()) {
                             for (ItemStack filter : filterUpgrades) {
@@ -119,7 +107,7 @@ public class CatcherBlockEntity extends CapabilityBlockEntity implements MenuPro
     }
 
     private AABB getBoundingBox() {
-        int rangeUpgrades = getUpgradeCount(ModItems.UPGRADE_RANGE.get()) + getUpgradeCount(LibItems.UPGRADE_RANGE.get());
+        int rangeUpgrades = getUpgradeCount(LibItems.UPGRADE_RANGE.get());
         return new AABB(worldPosition).inflate(rangeUpgrades, 2.0D + rangeUpgrades, rangeUpgrades);
     }
 

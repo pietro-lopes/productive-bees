@@ -137,6 +137,7 @@ public class CentrifugeBlockEntity extends FluidTankBlockEntity implements MenuP
 
     protected IItemHandlerModifiable upgradeHandler = new InventoryHandlerHelper.UpgradeHandler(4, this, List.of(
             LibItems.UPGRADE_TIME.get(),
+            LibItems.UPGRADE_TIME_2.get(),
             LibItems.UPGRADE_ENTITY_FILTER.get()
     ));
 
@@ -166,7 +167,7 @@ public class CentrifugeBlockEntity extends FluidTankBlockEntity implements MenuP
     }
 
     protected double getProcessingTimeModifier() {
-        double timeUpgradeModifier = 1 - (ProductiveBeesConfig.UPGRADES.timeBonus.get() * (getUpgradeCount(ModItems.UPGRADE_TIME.get()) + getUpgradeCount(LibItems.UPGRADE_TIME.get())));
+        double timeUpgradeModifier = 1 - (ProductiveBeesConfig.UPGRADES.timeBonus.get() * (getUpgradeCount(LibItems.UPGRADE_TIME_2.get()) * 2 + getUpgradeCount(LibItems.UPGRADE_TIME.get())));
 
         return Math.max(0, timeUpgradeModifier);
     }
@@ -280,23 +281,7 @@ public class CentrifugeBlockEntity extends FluidTankBlockEntity implements MenuP
         inv.setStackInSlot(InventoryHandlerHelper.INPUT_SLOT, stack);
 
         boolean isAllowedByFilter = true;
-        List<ItemStack> olfFilterUpgrades = this.getInstalledUpgrades(ModItems.UPGRADE_FILTER.get());
         List<ItemStack> filterUpgrades = getInstalledUpgrades(LibItems.UPGRADE_ENTITY_FILTER.get());
-        if (!olfFilterUpgrades.isEmpty()) {
-            isAllowedByFilter = false;
-            for (ItemStack filter : olfFilterUpgrades) {
-                List<Supplier<BeeIngredient>> allowedBees = FilterUpgradeItem.getAllowedBees(filter);
-                for (Supplier<BeeIngredient> allowedBee : allowedBees) {
-                    List<ItemStack> produceList = BeeHelper.getBeeProduce(level, (Bee) allowedBee.get().getCachedEntity(level), false, 1.0);
-                    for (ItemStack pStack: produceList) {
-                        if (pStack.getItem().equals(stack.getItem())) {
-                            isAllowedByFilter = true;
-                            break;
-                        }
-                    }
-                }
-            }
-        }
         if (!filterUpgrades.isEmpty()) {
             isAllowedByFilter = false;
             for (ItemStack filter : filterUpgrades) {

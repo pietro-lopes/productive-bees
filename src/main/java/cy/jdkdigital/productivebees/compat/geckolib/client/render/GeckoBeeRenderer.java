@@ -98,7 +98,7 @@ public class GeckoBeeRenderer extends GeoEntityRenderer<GeckoBee>
 
         @Override
         public void render(PoseStack poseStack, GeckoBee animatable, BakedGeoModel bakedModel, @Nullable RenderType renderType, MultiBufferSource bufferSource, @Nullable VertexConsumer buffer, float partialTick, int packedLight, int packedOverlay) {
-            if (!animatable.isInvisible() && animatable.isColored()) {
+            if (!animatable.isInvisible() && animatable.isColored() && BeeBodyLayer.baseTextures.containsKey(animatable.getRenderer())) {
                 renderType = RenderType.entityCutoutNoCull(BeeBodyLayer.baseTextures.get(animatable.getRenderer()).get("primary"));
                 int primaryColor = animatable.getColor(0, partialTick);
                 getRenderer().reRender(bakedModel, poseStack, bufferSource, animatable, renderType,

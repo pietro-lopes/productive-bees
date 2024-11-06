@@ -223,8 +223,8 @@ public class ConfigurableBee extends ProductiveBee implements IEffectBeeEntity
             if (null != this.navigation.getPath() && isTeleporting()) {
                 if (this.hasHive()) {
                     BlockEntity te = level().getBlockEntity(this.getHivePos());
-                    if (te instanceof AdvancedBeehiveBlockEntity) {
-                        int antiTeleportUpgrades = ((AdvancedBeehiveBlockEntity) te).getUpgradeCount(ModItems.UPGRADE_ANTI_TELEPORT.get()) + ((AdvancedBeehiveBlockEntity) te).getUpgradeCount(LibItems.UPGRADE_ANTI_TELEPORT.get());
+                    if (te instanceof AdvancedBeehiveBlockEntity advancedBeehiveBlockEntity) {
+                        int antiTeleportUpgrades = advancedBeehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_ANTI_TELEPORT.get());
                         if (antiTeleportUpgrades > 0) {
                             this.teleportCooldown = 10000;
                             super.customServerAiStep();

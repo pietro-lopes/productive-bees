@@ -48,7 +48,6 @@ public class BeeRenderer
             EntityRenderDispatcher entityRendererManager = minecraft.getEntityRenderDispatcher();
             MultiBufferSource.BufferSource buffer = minecraft.renderBuffers().bufferSource();
             entityRendererManager.render(bee, 0, 0, 0.0D, minecraft.getFrameTimeNs(), 1, postStack, buffer, 15728880);
-            buffer.endBatch();
             postStack.popPose();
         }
     }

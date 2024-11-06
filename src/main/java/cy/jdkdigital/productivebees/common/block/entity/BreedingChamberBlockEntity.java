@@ -89,7 +89,8 @@ public class BreedingChamberBlockEntity extends CapabilityBlockEntity implements
     };
 
     protected IItemHandlerModifiable upgradeHandler = new InventoryHandlerHelper.UpgradeHandler(4, this, List.of(
-            LibItems.UPGRADE_TIME.get()
+            LibItems.UPGRADE_TIME.get(),
+            LibItems.UPGRADE_TIME_2.get()
     ));
 
     public EnergyStorage energyHandler = new EnergyStorage(10000);
@@ -134,7 +135,7 @@ public class BreedingChamberBlockEntity extends CapabilityBlockEntity implements
     }
 
     protected double getProcessingTimeModifier() {
-        double timeUpgradeModifier = 1 - (ProductiveBeesConfig.UPGRADES.timeBonus.get() * (getUpgradeCount(ModItems.UPGRADE_TIME.get()) + getUpgradeCount(LibItems.UPGRADE_TIME.get())));
+        double timeUpgradeModifier = 1 - (ProductiveBeesConfig.UPGRADES.timeBonus.get() * (getUpgradeCount(LibItems.UPGRADE_TIME_2.get()) * 2 + getUpgradeCount(LibItems.UPGRADE_TIME.get())));
 
         return Math.max(0, timeUpgradeModifier);
     }
@@ -187,7 +188,7 @@ public class BreedingChamberBlockEntity extends CapabilityBlockEntity implements
     }
 
     protected double getEnergyConsumptionModifier() {
-        double timeUpgradeModifier = ProductiveBeesConfig.UPGRADES.timeBonus.get() * (getUpgradeCount(ModItems.UPGRADE_TIME.get()) + getUpgradeCount(LibItems.UPGRADE_TIME.get()));
+        double timeUpgradeModifier = ProductiveBeesConfig.UPGRADES.timeBonus.get() * (getUpgradeCount(LibItems.UPGRADE_TIME_2.get()) * 2 + getUpgradeCount(LibItems.UPGRADE_TIME.get()));
 
         return Math.max(1, timeUpgradeModifier);
     }

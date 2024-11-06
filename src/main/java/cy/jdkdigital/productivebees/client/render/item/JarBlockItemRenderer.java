@@ -101,7 +101,6 @@ public class JarBlockItemRenderer extends BlockEntityWithoutLevelRenderer {
         MultiBufferSource.BufferSource buffer = Minecraft.getInstance().renderBuffers().bufferSource();
         entityRendererDispatcher.setRenderShadow(false);
         entityRendererDispatcher.render(bee, 0, 0, 0, 0, 0, matrixStack, buffer, 15728880);
-        buffer.endBatch();
 
         matrixStack.popPose();
     }
@@ -126,7 +125,6 @@ public class JarBlockItemRenderer extends BlockEntityWithoutLevelRenderer {
         MultiBufferSource.BufferSource buffer = Minecraft.getInstance().renderBuffers().bufferSource();
         VertexConsumer vertexConsumer = ItemRenderer.getFoilBuffer(buffer, renderType, true, itemStack.hasFoil());
         Minecraft.getInstance().getItemRenderer().renderModelLists(bakedModel, itemStack, packedLight, packedOverlay, matrixStack, vertexConsumer);
-        buffer.endBatch();
 
         matrixStack.popPose();
     }

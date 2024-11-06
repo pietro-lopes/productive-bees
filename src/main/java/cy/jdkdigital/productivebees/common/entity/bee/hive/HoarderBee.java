@@ -264,7 +264,7 @@ public class HoarderBee extends ProductiveBee
                 List<ItemEntity> items = new ArrayList<>();
                 BlockEntity hive = level().getBlockEntity(HoarderBee.this.getHivePos());
                 if (hive instanceof AdvancedBeehiveBlockEntity beehiveBlockEntity) {
-                    int radius = 5 + beehiveBlockEntity.getUpgradeCount(ModItems.UPGRADE_RANGE.get()) + beehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_RANGE.get());
+                    int radius = 5 + beehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_RANGE.get());
                     items = HoarderBee.this.getItemsNearby(HoarderBee.this.getHivePos(), radius);
                 }
 

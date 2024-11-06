@@ -134,7 +134,7 @@ public class FarmerBee extends ProductiveBee
             if (FarmerBee.this.getHivePos() != null) {
                 BlockEntity hive = FarmerBee.this.level().getBlockEntity(FarmerBee.this.getHivePos());
                 if (hive instanceof AdvancedBeehiveBlockEntity beehiveBlockEntity) {
-                    int radius = 5 + beehiveBlockEntity.getUpgradeCount(ModItems.UPGRADE_RANGE.get()) + beehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_RANGE.get());
+                    int radius = 5 + beehiveBlockEntity.getUpgradeCount(LibItems.UPGRADE_RANGE.get());
                     List<BlockPos> harvestablesNearby = FarmerBee.this.findHarvestablesNearby(FarmerBee.this.getHivePos(), radius);
 
                     if (!harvestablesNearby.isEmpty()) {

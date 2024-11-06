@@ -78,6 +78,7 @@ public class HoneyGeneratorBlockEntity extends FluidTankBlockEntity implements M
 
     protected IItemHandlerModifiable upgradeHandler = new InventoryHandlerHelper.UpgradeHandler(4, this, List.of(
             LibItems.UPGRADE_TIME.get(),
+            LibItems.UPGRADE_TIME_2.get(),
             LibItems.UPGRADE_PRODUCTIVITY.get()
     )); // TODO add support for higher tier productivity upgrades
 
@@ -111,8 +112,8 @@ public class HoneyGeneratorBlockEntity extends FluidTankBlockEntity implements M
 
         if (++blockEntity.tickCounter % tickRate == 0) {
             // TODO use higher tier prod. upgrades
-            double consumeModifier = 1d + blockEntity.getUpgradeCount(ModItems.UPGRADE_PRODUCTIVITY.get()) + blockEntity.getUpgradeCount(LibItems.UPGRADE_PRODUCTIVITY.get());
-            double speedModifier = 1d + (ProductiveBeesConfig.UPGRADES.timeBonus.get() * (blockEntity.getUpgradeCount(ModItems.UPGRADE_TIME.get()) + blockEntity.getUpgradeCount(LibItems.UPGRADE_TIME.get())));
+            double consumeModifier = 1d + blockEntity.getUpgradeCount(LibItems.UPGRADE_PRODUCTIVITY.get());
+            double speedModifier = 1d + (ProductiveBeesConfig.UPGRADES.timeBonus.get() * (blockEntity.getUpgradeCount(LibItems.UPGRADE_TIME_2.get()) * 2 + blockEntity.getUpgradeCount(LibItems.UPGRADE_TIME.get())));
             int inputPowerAmount = (int) (ProductiveBeesConfig.GENERAL.generatorPowerGen.get() * tickRate * speedModifier);
             int fluidConsumeAmount = (int) (ProductiveBeesConfig.GENERAL.generatorHoneyUse.get() * tickRate * speedModifier / consumeModifier);
             if (blockEntity.fluidHandler.getFluidInTank(0).getAmount() >= fluidConsumeAmount && blockEntity.energyHandler.receiveEnergy(inputPowerAmount, true) > 0) {

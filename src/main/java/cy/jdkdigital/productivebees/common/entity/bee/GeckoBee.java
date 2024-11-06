@@ -52,7 +52,7 @@ public class GeckoBee extends ConfigurableBee implements GeoEntity
         // Colored bees use tinted base texture
         if (isColored()) {
             String modelType = getRenderer();
-            textureLocation = ProductiveBees.MODID + ":textures/entity/bee/base/" + modelType + "/bee";
+            textureLocation = ProductiveBees.MODID + ":textures/entity/bee/base/" + (!modelType.isEmpty() ? modelType : "default") + "/bee";
         }
 
         if (hasBeeTexture()) {

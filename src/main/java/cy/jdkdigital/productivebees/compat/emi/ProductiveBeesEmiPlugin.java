@@ -233,12 +233,12 @@ public class ProductiveBeesEmiPlugin implements EmiPlugin
                         }
                     }
                     if (!nbt.getBoolean("selfbreed")) {
-                        descriptions.add(Component.translatable("productivebees.ingredient.description.selfbreed"));
+                        descriptions.add(Component.translatable("productivebees.ingredient.description.selfbreed", ""));
                     }
                 } else {
                     descriptions.add(Component.translatable("productivebees.ingredient.description." + beeId));
                     if (beeId.equals("lumber_bee") || beeId.equals("quarry_bee") || beeId.equals("rancher_bee") || beeId.equals("collector_bee") || beeId.equals("hoarder_bee") || beeId.equals("farmer_bee") || beeId.equals("cupid_bee")) {
-                        descriptions.add(Component.translatable("productivebees.ingredient.description.selfbreed"));
+                        descriptions.add(Component.translatable("productivebees.ingredient.description.selfbreed", ""));
                     }
                 }
 

@@ -115,6 +115,7 @@ public class EventHandler
             double value = switch (upgradeType.getPath()) {
                 case "upgrade_child" -> ProductiveBeesConfig.UPGRADES.breedingChance.get();
                 case "upgrade_time" -> ProductiveBeesConfig.UPGRADES.timeBonus.get();
+                case "upgrade_time_2" -> ProductiveBeesConfig.UPGRADES.timeBonus.get() * 2;
                 case "upgrade_productivity" -> ProductiveBeesConfig.UPGRADES.productivityMultiplier.get();
                 case "upgrade_productivity_2" -> ProductiveBeesConfig.UPGRADES.productivityMultiplier2.get();
                 case "upgrade_productivity_3" -> ProductiveBeesConfig.UPGRADES.productivityMultiplier3.get();
@@ -136,7 +137,7 @@ public class EventHandler
                     event.addValidBlock(Component.literal("Catcher"));
                 }
                 case "upgrade_gene_sampler", "upgrade_anti_teleport", "upgrade_block", "upgrade_simulator", "upgrade_productivity_2", "upgrade_productivity_3", "upgrade_productivity_4" -> event.addValidBlock(Component.literal("Advanced Beehive"));
-                case "upgrade_time" -> {
+                case "upgrade_time", "upgrade_time_2" -> {
                     event.addValidBlock(Component.literal("Advanced Beehive"));
                     event.addValidBlock(Component.literal("Centrifuge"));
                     event.addValidBlock(Component.literal("Breeding Chamber"));
